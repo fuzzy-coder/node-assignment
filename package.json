@@ -3,11 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "compile": "node-gyp rebuild",
     "start": "node ./bin/www"
   },
   "dependencies": {
     "debug": "~2.6.9",
     "express": "~4.16.0",
-    "morgan": "~1.9.0"
-  }
+    "morgan": "~1.9.0",
+    "nan": "^2.11.1",
+    "node-gyp": "^3.8.0"
+  },
+  "gypfile": true
 }

@@ -6,34 +6,54 @@ const UserSchema = new mongoose.Schema({
         name: {
                 type: String,
                 trim: true,
-                required: true,
+                required: [true, 'User name is required'],
         },
         email: {
                 type: String,
                 lowercase: true,
                 trim: true,
                 index: true,
-                required: true,
+                required: [true, 'User email is required'],
+                validate: {
+                        validator: function(value){
+                                return /[a-z0-9!#$%&'*+\/=?^_{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9][a-z0-9-]*[a-z0-9]/.test(value)
+                        },
+                        message: function(props){
+                                return `${props.value} is not a valid email`
+                        }
+                }
         },
         password: {
                 type: String,
-                required: true,
+                required: [true, 'A valid alphanumeric password is required with length greater than 6'],
                 bcrypt: true,
+                min: [6, 'Password should be of atleast 6 characters'],
+                validate: {
+                        validator: function(value){
+                                return /^[a-zA-Z0-9]+$/.test(value)
+                        },
+                        message: function(props){
+                                return `A valid alphanumeric password is required with length greater than 6`
+                        }
+                },
         },
         address: {
                 type: String,
                 trim: true,
-                required: true,
+                required: [true, 'User address is required']
         },
         phone: {
                 type: String,
                 trim: true,
-                required: true,
-        },
-        dob: {
-                type: Date,
-                required: false,
-                default: null
+                validate: {
+                        validator: function(value){
+                                return /^[789]\d{9}$/.test(value)
+                        },
+                        message: function(props){
+                                return `${props.value} is not a valid phone`
+                        }
+                },
+                required: [true, 'User phone is required']
         },
         contacts: [{
                 type: mongoose.Schema.Types.ObjectId,
@@ -63,13 +83,29 @@ const UserContactSchema = new mongoose.Schema({
                 lowercase: true,
                 trim: true,
                 index: true,
-                required: true,
+                required: [true, 'User email is required'],
+                validate: {
+                        validator: function(value){
+                                return /[a-z0-9!#$%&'*+\/=?^_{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9][a-z0-9-]*[a-z0-9]/.test(value)
+                        },
+                        message: function(props){
+                                return `${props.value} is not a valid email`
+                        }
+                }
         },
         phone: {
                 type: String,
                 trim: true,
                 index: true,
-                required: true,
+                validate: {
+                        validator: function(value){
+                                return /^[789]\d{9}$/.test(value)
+                        },
+                        message: function(props){
+                                return `${props.value} is not a valid phone`
+                        }
+                },
+                required: [true, 'User phone is required']
         },
         user: {
                 type: mongoose.Schema.Types.ObjectId,

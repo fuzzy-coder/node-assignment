@@ -1,3 +1,12 @@
+(async ()=>{
+    try {
+        global['mongoose'] = await require('./util/db')    
+    } catch (error) {
+        console.error(error)
+        process.exit(0)
+    }
+})()
+
 var express = require('express');
 var logger = require('morgan');
 

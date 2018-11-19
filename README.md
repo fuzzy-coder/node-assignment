@@ -1,5 +1,5 @@
 # node-assignment
-Contains a simple POC where comparison is done with regards to response time when checking primality of a number in node and via c++ addon
+Contains a simple POC where primality check is done in node and via c++ addon.
 
 # requirements
 * First of all make sure you have the following dependencies 
@@ -10,3 +10,7 @@ Contains a simple POC where comparison is done with regards to response time whe
 
 * `git clone` and `npm install`
 * **If running on server other than macosx** do `npm run compile`. This runs `node-gyp` and compiles c++ addon and saves under `./build/Release/addon`
+
+# `npm run start` to start local server at port 3000
+
+# For API reference you can import the following postman collection https://gist.github.com/fuzzy-coder/e081a1804f45d75e037a15362559d94e
